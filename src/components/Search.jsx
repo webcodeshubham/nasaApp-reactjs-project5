@@ -6,24 +6,24 @@ import { Link } from "react-router-dom";
 const API_URL =
   "https://api.nasa.gov/techtransfer/patent/?engine&api_key=vyOzUpQ1WCREoCppLkqibA8zRj83t2oksG4ZT6Ck";
 
-const Search = ({addArticleHandler, articles}) => {
+const Search = ({ addArticleHandler, articles, setSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
   // console.log(searchTerm);
 
   articles.map((article) => {
-    const articleTitle = article[2]
-  })
+    const articleTitle = article[2];
+  });
 
   const searchArticles = async (articles) => {
     const response = await fetch(`${API_URL}&s=${articles[1][0]}`);
     const data = await response.json();
-    console.log(data.results)
+    console.log(data.results);
     addArticleHandler(data[0]);
   };
 
-  useEffect(() => {
-    searchArticles("");
-  }, []);
+  // useEffect(() => {
+  //   searchArticles("");
+  // }, []);
 
   return (
     <>
@@ -50,9 +50,9 @@ const Search = ({addArticleHandler, articles}) => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <Link to="/">
-            <span onClick={() => searchArticles(searchTerm)}>GO</span>
-          </Link>
+          {/* <Link to="/"> */}
+          <span onClick={() => setSearch(searchTerm)}>GO</span>
+          {/* </Link> */}
         </div>
       </section>
     </>
@@ -61,15 +61,10 @@ const Search = ({addArticleHandler, articles}) => {
 
 export default Search;
 
-
-
-
-
 const object = {
   1: 2,
   3: 3,
   3: 3,
   6: 3,
-  7: 3
-}
-
+  7: 3,
+};
